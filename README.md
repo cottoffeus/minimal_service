@@ -5,3 +5,4 @@
 ./gradlew build
 ```
 
+Simple service that get requests and answer
