@@ -14,13 +14,16 @@ import org.http4k.server.asServer
 val app: HttpHandler = routes(
     "/ping" bind GET to {
         Response(OK).body("pong")
+    },
+    "/health" bind GET to {
+        Response(OK).body("{\"status\": \"OK\"}")
     }
 )
 
 fun main() {
     val printingApp: HttpHandler = PrintRequest().then(app)
 
-    val server = printingApp.asServer(SunHttp(9000)).start()
+    val server = printingApp.asServer(SunHttp(8000)).start()
 
     println("Server started on " + server.port())
 }
