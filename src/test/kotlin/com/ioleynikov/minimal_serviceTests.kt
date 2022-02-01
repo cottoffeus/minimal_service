@@ -13,5 +13,9 @@ class minimal_serviceTest {
     fun `Ping test`() {
         assertEquals(app(Request(GET, "/ping")), Response(OK).body("pong"))
     }
+    @Test
+    fun `Health test`() {
+        assertEquals(app(Request(GET, "/health")), Response(OK).body("{\"status\": \"OK\"}"))
+    }
 
 }

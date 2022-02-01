@@ -20,7 +20,7 @@ val app: HttpHandler = routes(
     }
 )
 
-fun main() {
+fun main(args : Array<String>) {
     val printingApp: HttpHandler = PrintRequest().then(app)
 
     val server = printingApp.asServer(SunHttp(8000)).start()

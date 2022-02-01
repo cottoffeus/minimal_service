@@ -12,7 +12,6 @@ buildscript {
 }
 
 
-
 repositories {
     mavenCentral()
 }
@@ -34,4 +33,14 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+}
+
+task fatJar(type: Jar) {
+    duplicatesStrategy = 'include'
+    manifest {
+        attributes 'Main-Class': "${mainClassName}"
+    }
+    archiveBaseName = "${rootProject.name}"
+    from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
